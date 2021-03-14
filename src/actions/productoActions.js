@@ -7,7 +7,11 @@ import {
     DESCARGA_PRODUCTOS_ERROR,
     OBTENER_PRODUCTO_ELIMINAR,
     PRODUCTO_ELIMINADO_ERROR,
-    PRODUCTO_ELIMINADO_EXITO
+    PRODUCTO_ELIMINADO_EXITO,
+    OBTENER_PRODUCTO_EDITAR,
+    COMENZAR_EDICION_PRODUCTO,
+    PRODUCTO_EDITADO_ERROR,
+    PRODUCTO_EDITADO_EXITO
 } from '../types';
 import clienteAxios from '../config/axios';
 import Swal from 'sweetalert2';
@@ -64,10 +68,13 @@ const agregarProductoError = estado => ({
 export function obtenerProductosAction() {
     return async (dispatch) => {
         dispatch(descargarProductos());
+
         try {
             const respuesta = await clienteAxios.get('/productos');
+
             dispatch(descargarProductosExitosa(respuesta.data));
-        } catch (err) {
+        } catch (error) {
+            console.log(error);
             dispatch(descargarProductosError());
         }
     }
@@ -92,7 +99,7 @@ const descargarProductosError = () => ({
 export function borrarProductoAction(id) {
     return async (dispatch) => {
         dispatch(obtenerProductoEliminar(id));
-        try{
+        try {
             await clienteAxios.delete(`/productos/${id}`);
             dispatch(eliminarProductoExito());
 
@@ -102,7 +109,7 @@ export function borrarProductoAction(id) {
                 'El producto se elimino correctamente',
                 'success'
             );
-        }catch(err){
+        } catch (err) {
             dispatch(eliminarProductoError());
         }
     }
@@ -120,4 +127,38 @@ const eliminarProductoExito = () => ({
 const eliminarProductoError = () => ({
     type: PRODUCTO_ELIMINADO_ERROR,
     payload: true
+});
+
+// colocar producto en edicion
+export function obtenerProductoEditar(producto) {
+    return (dispatch) => {
+        dispatch(obtenerProductoEditarAction(producto));
+    }
+}
+
+const obtenerProductoEditarAction = producto => ({
+    type: OBTENER_PRODUCTO_EDITAR,
+    payload: producto
+});
+
+// edita un registro en api y state
+export function editarProductoAction(producto) {
+    return async (dispatch) => {
+        dispatch(editarProducto());
+        try {
+            clienteAxios.put(`productos/${producto.id}`, producto);
+            dispatch(editarProductoExito(producto));
+        } catch (err) {
+
+        }
+    }
+}
+
+const editarProducto = () => ({
+    type: COMENZAR_EDICION_PRODUCTO
+});
+
+const editarProductoExito = producto => ({
+    type: PRODUCTO_EDITADO_EXITO,
+    payload: producto
 });

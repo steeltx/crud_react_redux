@@ -3,16 +3,16 @@
     {
       "id": 1,
       "nombre": "Jugo de Zanahoria",
-      "precio": "31111"
+      "precio": 20
     },
     {
       "id": 2,
       "nombre": "Jugo de Naranja",
-      "precio": "1"
+      "precio": 10
     },
     {
-      "nombre": "Jugo de Naranja",
-      "precio": "300",
+      "nombre": "Jugo de Mandarina",
+      "precio": 30,
       "id": 3
     }
   ]
