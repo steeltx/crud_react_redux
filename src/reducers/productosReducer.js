@@ -23,7 +23,7 @@ const initialState = {
     productoeditar: null
 }
 
-export default function (state = initialState, action) {
+const productoReducer = (state = initialState, action)  => {
     switch (action.type) {
         case AGREGAR_PRODUCTO:
         case COMENZAR_DESCARGA_PRODUCTOS:
@@ -81,3 +81,5 @@ export default function (state = initialState, action) {
             return state;
     }
 }
+
+export default productoReducer;

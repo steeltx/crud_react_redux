@@ -1,18 +1,18 @@
 {
   "productos": [
     {
-      "id": 1,
-      "nombre": "Jugo de Zanahoria",
-      "precio": 20
+      "nombre": "Agua",
+      "precio": 5,
+      "id": 1
     },
     {
-      "id": 2,
-      "nombre": "Jugo de Naranja",
-      "precio": 10
+      "nombre": "Jugo",
+      "precio": 20,
+      "id": 2
     },
     {
-      "nombre": "Jugo de Mandarina",
-      "precio": 30,
+      "nombre": "Taco",
+      "precio": 18,
       "id": 3
     }
   ]

@@ -71,10 +71,8 @@ export function obtenerProductosAction() {
 
         try {
             const respuesta = await clienteAxios.get('/productos');
-
             dispatch(descargarProductosExitosa(respuesta.data));
         } catch (error) {
-            console.log(error);
             dispatch(descargarProductosError());
         }
     }
@@ -149,7 +147,7 @@ export function editarProductoAction(producto) {
             clienteAxios.put(`productos/${producto.id}`, producto);
             dispatch(editarProductoExito(producto));
         } catch (err) {
-
+            dispatch(editarProductoError());
         }
     }
 }
@@ -161,4 +159,9 @@ const editarProducto = () => ({
 const editarProductoExito = producto => ({
     type: PRODUCTO_EDITADO_EXITO,
     payload: producto
+});
+
+const editarProductoError= () => ({
+    type: PRODUCTO_EDITADO_ERROR,
+    payload: true
 });
